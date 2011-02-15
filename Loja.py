@@ -1,0 +1,2 @@
+class Loja():
+    pass
