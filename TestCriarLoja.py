@@ -1,4 +1,5 @@
 import unittest
+from Loja import Loja
 
 class TestLoja(unittest.TestCase):
 
