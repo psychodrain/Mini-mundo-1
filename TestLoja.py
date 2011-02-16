@@ -15,7 +15,8 @@ class TestLoja(unittest.TestCase):
     def testCadastrarAparelho(self):
         
         self.loja.aparelhos_disponiveis.append(self.aparelho)
-        self.assertEqual(loja.aparelhos_disponiveis[-1], aparelho)
+        self.assertEqual(self.loja.aparelhos_disponiveis[-1], self.aparelho)
+
 
 
 if __name__== "__main__":
