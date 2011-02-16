@@ -1,19 +1,22 @@
 import unittest
-from Loja import Loja
-from Aparelho import Aparelho
+import Loja
+import Aparelho
 
 class TestLoja(unittest.TestCase):
 
+    def setUp(self):
+        self.loja = Loja.Loja("Lopes")
+        self.aparelho = Aparelho.Aparelho()
+        
     def testCriarLoja(self):
-        loja = Loja("Lopes")
-        assert loja.nome != None
+        assert self.loja.nome != None
 
-    aparelho = Aparelho()
-    def testCadastrarAparelho(self, aparelho):
-        loja.aparelhos_disponiveis.append(aparelho)
+    
+    def testCadastrarAparelho(self):
+        
+        self.loja.aparelhos_disponiveis.append(self.aparelho)
         self.assertEqual(loja.aparelhos_disponiveis[-1], aparelho)
 
 
-testCadas
-##if __name__== "__main__":
-##    unittest.main()
+if __name__== "__main__":
+    unittest.main()
