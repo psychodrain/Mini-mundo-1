@@ -13,9 +13,16 @@ class TestLoja(unittest.TestCase):
 
     
     def testCadastrarAparelho(self):
-        
         self.loja.aparelhos_disponiveis.append(self.aparelho)
         self.assertEqual(self.loja.aparelhos_disponiveis[-1], self.aparelho)
+
+    def testListarAparelho(self):
+        self.loja.aparelhos_disponiveis.append(self.aparelho)
+        
+        if self.loja.aparelhos_disponiveis != []:
+            print self.loja.aparelhos_disponiveis
+        else:
+            print 'Sem aparelhos'
 
 
 
