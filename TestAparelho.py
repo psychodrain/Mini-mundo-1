@@ -6,7 +6,7 @@ class TestAparelho(unittest.TestCase):
     def testCriacaodeAparelho(self):
         self.aparelho = Aparelho("sony", "vaio")
 
-        self.assertEqual(self.aparelho.marca_aparelho, 'sony')
+        self.assertEqual(self.aparelho.marca, 'sony')
 
 
 
