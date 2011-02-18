@@ -1,6 +1,7 @@
 import unittest
 from Aparelho import Aparelho
 from Termo import Termo
+from Cliente import Cliente
 
 class TestAparelho(unittest.TestCase):
 
