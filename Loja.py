@@ -9,7 +9,7 @@ class Loja:
 
 
     def listarAparelho(self):
-         if self.aparelhos_disponiveis != []:
+        if self.aparelhos_disponiveis != []:
             print self.loja.aparelhos_disponiveis
         else:
             print 'Sem aparelhos'

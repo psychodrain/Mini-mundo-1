@@ -24,6 +24,8 @@ class TestLoja(unittest.TestCase):
         else:
             print 'Sem aparelhos'
 
+          
+
 
 
 if __name__== "__main__":
