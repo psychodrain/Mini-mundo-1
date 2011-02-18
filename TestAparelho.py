@@ -3,12 +3,15 @@ from Aparelho import Aparelho
 
 class TestAparelho(unittest.TestCase):
 
-    def setUp(self):
-        pass
+    def testCriacaodeAparelho(self):
+        self.aparelho = Aparelho("sony", "vaio")
+
+        self.assertEqual(self.aparelho.marca_aparelho, 'sony')
 
 
-    aparelho = Aparelho()
 
+        
+            
 
 if __name__== "__main__":
     unittest.main()

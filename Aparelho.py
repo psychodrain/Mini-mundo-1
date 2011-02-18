@@ -1,2 +1,11 @@
 class Aparelho:
-    pass
+
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+#, num_serie, termo_garantia, cliente        
+##        
+##        self.num_serie = num_serie
+##        self.termo_garantia = termo_garantia
+##        self.cliente = cliente
