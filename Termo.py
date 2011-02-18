@@ -1,0 +1,2 @@
+class Termo():
+    pass
