@@ -10,10 +10,10 @@ class TestAparelho(unittest.TestCase):
         cliente = Cliente()
         self.aparelho = Aparelho("sony", "vaio", 1040, termo, cliente)
         self.assertEqual(self.aparelho.marca, 'sony')
-        self.assertEqual(self.aparelho.modelo, 'sony')
-        self.assertEqual(self.aparelho.num_serie, 'sony')
-        self.assertEqual(self.aparelho.termo_garantia, 'sony')
-        self.assertEqual(self.aparelho.cliente, 'sony')
+        self.assertEqual(self.aparelho.modelo, 'vaio')
+        self.assertEqual(self.aparelho.num_serie, 1040)
+        self.assertEqual(self.aparelho.termo_garantia, termo)
+        self.assertEqual(self.aparelho.cliente, cliente)
             
 
 if __name__== "__main__":
