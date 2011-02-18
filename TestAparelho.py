@@ -7,6 +7,7 @@ class TestAparelho(unittest.TestCase):
 
     def testCriacaodeAparelho(self):
         termo = Termo()
+        cliente = Cliente()
         self.aparelho = Aparelho("sony", "vaio", 1040, termo, cliente)
         self.assertEqual(self.aparelho.marca, 'sony')
         self.assertEqual(self.aparelho.modelo, 'sony')
