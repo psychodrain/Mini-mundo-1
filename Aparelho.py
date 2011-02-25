@@ -6,6 +6,10 @@ class Aparelho:
         self.num_serie = num_serie
         self.data_compra = data_compra
         self.cliente = cliente
+
+
+    def validarTroca(self, data_compra, data_troca):
+        pass
         
 
 
