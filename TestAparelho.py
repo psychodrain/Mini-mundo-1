@@ -15,27 +15,25 @@ class TestAparelho(unittest.TestCase):
 
 
 
-    def testValidarTroca(self):
+    def testValidarTroca_data_ok(self):
         cliente = Cliente()
         self.aparelho = Aparelho("sony", "vaio", 1040, '25/02/2011', cliente)
         data_compra = self.aparelho.data_compra
-        data_troca = '25/03/2011'
-        self.aparelho.validarTroca(data_compra, data_troca)
-
-
+        data_troca = '25/11/2011' # dentro do prazo
+        self.failUnless(self.aparelho.validarTroca(data_compra, data_troca))
 
         
-##        self.assertEqual(data_compra, self.aparelho.data_compra)
-##
-##        dia = int(data_compra[0:2])
-##        mes = int(data_compra[3:5])
-##        ano = int(data_compra[6:])
-##
-##        self.assertEqual(dia, 25)
-##        self.assertEqual(mes, 02)
-##        self.assertEqual(ano, 2011)
+    def testValidarTroca_data_expirada(self):
+        cliente = Cliente()
+        self.aparelho = Aparelho("sony", "vaio", 1040, '25/02/2011', cliente)
+        data_compra = self.aparelho.data_compra
+        data_troca = '25/11/2015' # mais de um ano
+        self.failUnless(self.aparelho.validarTroca(data_compra, data_troca) == False)
 
-
+        
+            
+        
+        
 
 if __name__== "__main__":
     unittest.main()
