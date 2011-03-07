@@ -6,6 +6,7 @@ class Aparelho:
         self.num_serie = num_serie
         self.data_compra = data_compra
         self.cliente = cliente
+        self.trocado = False
 
 
     def validarTroca(self, data_compra, data_troca):
@@ -19,7 +20,10 @@ class Aparelho:
         ano_troca = int(data_troca[6:])
 
         
-        if ((dia_troca - dia_compra) + (mes_troca - mes_compra)*30 + (ano_troca - ano_compra)*360) <= 360:
+        if ((dia_troca - dia_compra) + (mes_troca - mes_compra)*30 +
+            (ano_troca - ano_compra)*360) <= 360:
+
+            self.trocado = True
 
             return True
         

@@ -22,6 +22,9 @@ class TestAparelho(unittest.TestCase):
         data_troca = '25/11/2011' # dentro do prazo
         self.failUnless(self.aparelho.validarTroca(data_compra, data_troca))
 
+        # o flag indicando que o aparelho foi trocado deve ser True
+        self.assertEqual(self.aparelho.trocado, True)
+
         
     def testValidarTroca_data_expirada(self):
         cliente = Cliente()
@@ -30,7 +33,8 @@ class TestAparelho(unittest.TestCase):
         data_troca = '25/11/2015' # mais de um ano
         self.failUnless(self.aparelho.validarTroca(data_compra, data_troca) == False)
 
-        
+        # o flag indicando que o aparelho foi trocado deve permanecer False
+        self.assertEqual(self.aparelho.trocado, False)
             
         
         
