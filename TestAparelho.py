@@ -3,16 +3,20 @@ from Aparelho import Aparelho
 from Cliente import Cliente
 
 class TestAparelho(unittest.TestCase):
-    
+
+
+    def setUp(self):
+        self.cliente = Cliente()
+        self.aparelho = Aparelho("sony", "vaio", 1040, '25/02/2011', self.cliente)
 
     def testCriacaodeAparelho(self):
-        cliente = Cliente()
-        self.aparelho = Aparelho("sony", "vaio", 1040, '25/02/2011', cliente)
+        
+        
         self.assertEqual(self.aparelho.marca, 'sony')
         self.assertEqual(self.aparelho.modelo, 'vaio')
         self.assertEqual(self.aparelho.num_serie, 1040)
         self.assertEqual(self.aparelho.data_compra, '25/02/2011')
-        self.assertEqual(self.aparelho.cliente, cliente)
+        self.assertEqual(self.aparelho.cliente, self.cliente)
 
 
     def testValidarTroca_data_ok(self):
@@ -68,6 +72,13 @@ class TestAparelho(unittest.TestCase):
         # ao adicionar mais um aparelho, o tamaho da lista de aparelhos disponiveis deve ser 2
         tamanho = len(Aparelho.aparelhos_disponiveis)
         self.assertEqual(tamanho, 2)
+
+        
+    def testListarAparelhosDisponiveis(self):
+        cliente2 = Cliente()
+        self.aparelho2 = Aparelho("Apple", "iPhone", 2050, '11/03/2011', cliente2)
+
+        self.aparelho2.listarAparelhos()
         
         
 
