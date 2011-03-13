@@ -9,6 +9,9 @@ class TestAparelho(unittest.TestCase):
         self.cliente = Cliente()
         self.aparelho = Aparelho("sony", "vaio", 1040, '25/02/2011', self.cliente)
 
+        self.cliente2 = Cliente()
+        self.aparelho2 = Aparelho("Apple", "iPhone", 2050, '11/03/2011', self.cliente2)
+
     def testCriacaodeAparelho(self):
         
         
@@ -20,34 +23,38 @@ class TestAparelho(unittest.TestCase):
 
 
     def testValidarTroca_data_ok(self):
-        cliente = Cliente()
-        self.aparelho = Aparelho("sony", "vaio", 1040, '25/02/2011', cliente)
+        
+        
         data_compra = self.aparelho.data_compra
         data_troca = '25/11/2011' # dentro do prazo
-        self.failUnless(self.aparelho.validarTroca(data_compra, data_troca, cliente, 'nao liga'))
-        # o flag indicando que o aparelho foi trocado deve ser True
+
+        # nao deve falhar, pois o aparelho esta sendo trocado dentro do prazo
+        self.failUnless(self.aparelho.validarTroca(data_compra, data_troca, self.cliente, 'nao liga'))
+        # o flag indicando que o aparelho foi trocado deve ser True, pois a troca foi validada
         self.assertEqual(self.aparelho.trocado, True)
         # verifica o registro do cliente que realizou a troca (neste caso foi o mesmo que cliente que comprou)
-        self.assertEqual(self.aparelho.dados_troca['cliente'], cliente)
+        self.assertEqual(self.aparelho.dados_troca['cliente'], self.cliente)
         # verificacao da data e do defeito dentro do dicionario dados_troca
         self.assertEqual(self.aparelho.dados_troca['data'], '25/11/2011')
         self.assertEqual(self.aparelho.dados_troca['defeito'], 'nao liga')
 
         
     def testValidarTroca_data_expirada(self):
-        cliente = Cliente()
-        self.aparelho = Aparelho("sony", "vaio", 1040, '25/02/2011', cliente)   
+        
+        
         data_compra = self.aparelho.data_compra
         data_troca = '25/11/2015' # fora do prazo (mais de um ano)
-        self.failUnless(self.aparelho.validarTroca(data_compra, data_troca, cliente, 'nao liga') == False)
+
+        # a validacao deve falhar retornando False, pois a data da troca esta fora do prazo
+        self.failUnless(self.aparelho.validarTroca(data_compra, data_troca, self.cliente, 'nao liga') == False)
 
         # o flag indicando que o aparelho foi trocado deve permanecer False
         self.assertEqual(self.aparelho.trocado, False)
 
 
     def testCadastrarAparelho1(self):
-        cliente = Cliente()
-        self.aparelho = Aparelho("sony", "vaio", 1040, '25/02/2011', cliente)
+        
+        
         Aparelho.cadastrarAparelho(self.aparelho) # metodo de classe para cadastrar aparelhos
 
         # verifica se o ultimo aparelho adicionado na lista de aparelhos
@@ -60,9 +67,7 @@ class TestAparelho(unittest.TestCase):
             ao cadastrar um segundo aparelho, a lista de aparelhos disponiveis
             deve crescer para dois. Este teste verificara isso.
         """
-
-        cliente2 = Cliente()
-        self.aparelho2 = Aparelho("Apple", "iPhone", 2050, '11/03/2011', cliente2)
+        
         Aparelho.cadastrarAparelho(self.aparelho2)
         
         # verifica se o ultimo aparelho adicionado na lista de aparelhos
@@ -75,8 +80,6 @@ class TestAparelho(unittest.TestCase):
 
         
     def testListarAparelhosDisponiveis(self):
-        cliente2 = Cliente()
-        self.aparelho2 = Aparelho("Apple", "iPhone", 2050, '11/03/2011', cliente2)
 
         self.aparelho2.listarAparelhos()
         
