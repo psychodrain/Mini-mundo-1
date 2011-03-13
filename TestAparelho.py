@@ -6,6 +6,10 @@ class TestAparelho(unittest.TestCase):
 
 
     def setUp(self):
+        """
+            Este metodo inicia as variaveis que serao usadas ao longo do teste
+        """
+
         self.cliente = Cliente()
         self.aparelho = Aparelho("sony", "vaio", 1040, '25/02/2011', self.cliente)
 
@@ -13,7 +17,10 @@ class TestAparelho(unittest.TestCase):
         self.aparelho2 = Aparelho("Apple", "iPhone", 2050, '11/03/2011', self.cliente2)
 
     def testCriacaodeAparelho(self):
-        
+        """
+            Teste para verificar se o aparelho esta sendo criado com
+            os parametros pretendidos
+        """
         
         self.assertEqual(self.aparelho.marca, 'sony')
         self.assertEqual(self.aparelho.modelo, 'vaio')
@@ -23,6 +30,10 @@ class TestAparelho(unittest.TestCase):
 
 
     def testValidarTroca_data_ok(self):
+        """
+            Teste que deve verificar se o metodo validarTroca do apareho realmente
+            valida as trocas no caso em que a data da troca esta dentro do prazo
+        """
         
         
         data_compra = self.aparelho.data_compra
@@ -40,6 +51,10 @@ class TestAparelho(unittest.TestCase):
 
         
     def testValidarTroca_data_expirada(self):
+        """
+            Teste que deve verificar se o metodo validarTroca do apareho realmente
+            NAO valida as trocas no caso em que a data da troca esta fora do prazo
+        """
         
         
         data_compra = self.aparelho.data_compra
@@ -53,8 +68,11 @@ class TestAparelho(unittest.TestCase):
 
 
     def testCadastrarAparelho1(self):
-        
-        
+        """
+            Teste que deve verificar se o metodo cadastrarAparelho realmente
+            esta adicionando o aparelho criado na lista de aparelhos disponiveis
+        """
+                
         Aparelho.cadastrarAparelho(self.aparelho) # metodo de classe para cadastrar aparelhos
 
         # verifica se o ultimo aparelho adicionado na lista de aparelhos
@@ -64,7 +82,7 @@ class TestAparelho(unittest.TestCase):
         
     def testCadastrarAparelho2(self):
         """
-            ao cadastrar um segundo aparelho, a lista de aparelhos disponiveis
+            Ao cadastrar um segundo aparelho, a lista de aparelhos disponiveis
             deve crescer para dois. Este teste verificara isso.
         """
         
@@ -79,9 +97,12 @@ class TestAparelho(unittest.TestCase):
         self.assertEqual(tamanho, 2)
 
         
-    def testListarAparelhosDisponiveis(self):
-
-        self.aparelho2.listarAparelhos()
+##    def testListarAparelhosDisponiveis(self):
+##        """
+##            Teste simples para verificar se os aparelhos estao sendo listados corretamente
+##        """
+##
+##        self.aparelho2.listarAparelhos()
         
         
 
