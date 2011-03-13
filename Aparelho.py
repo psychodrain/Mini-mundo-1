@@ -1,5 +1,8 @@
 class Aparelho:
 
+    #atributo de classe
+    aparelhos_disponiveis = []
+    
     def __init__(self, marca, modelo, num_serie, data_compra, cliente):
         self.marca = marca
         self.modelo = modelo 
@@ -33,6 +36,10 @@ class Aparelho:
         
         else:
             return False
+
+
+    def cadastrarAparelho(aparelho):
+        Aparelho.aparelhos_disponiveis.append(aparelho)
 
 
 
