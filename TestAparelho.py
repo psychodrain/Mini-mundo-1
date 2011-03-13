@@ -11,10 +11,11 @@ class TestAparelho(unittest.TestCase):
         """
 
         self.cliente = Cliente()
-        self.aparelho = Aparelho("sony", "vaio", 1040, '25/02/2011', self.cliente)
+        self.aparelho = Aparelho("Sony", "Vaio", 1040, '25/02/2011', self.cliente)
 
         self.cliente2 = Cliente()
         self.aparelho2 = Aparelho("Apple", "iPhone", 2050, '11/03/2011', self.cliente2)
+        
 
     def testCriacaodeAparelho(self):
         """
@@ -22,11 +23,29 @@ class TestAparelho(unittest.TestCase):
             os parametros pretendidos
         """
         
-        self.assertEqual(self.aparelho.marca, 'sony')
-        self.assertEqual(self.aparelho.modelo, 'vaio')
+        self.assertEqual(self.aparelho.marca, 'Sony')
+        self.assertEqual(self.aparelho.modelo, 'Vaio')
         self.assertEqual(self.aparelho.num_serie, 1040)
         self.assertEqual(self.aparelho.data_compra, '25/02/2011')
         self.assertEqual(self.aparelho.cliente, self.cliente)
+
+
+                
+    def testValidarTroca_data_expirada(self):
+        """
+            Teste que deve verificar se o metodo validarTroca do apareho realmente
+            NAO valida as trocas no caso em que a data da troca esta fora do prazo
+        """
+        
+        
+        data_compra = self.aparelho.data_compra
+        data_troca = '25/11/2015' # fora do prazo (mais de um ano)
+
+        # a validacao deve falhar retornando False, pois a data da troca esta fora do prazo
+        self.failUnless(self.aparelho.validarTroca(data_compra, data_troca, self.cliente, 'nao liga') == False)
+
+        # o flag indicando que o aparelho foi trocado deve permanecer False
+        self.assertEqual(self.aparelho.trocado, False)
 
 
     def testValidarTroca_data_ok(self):
@@ -50,29 +69,14 @@ class TestAparelho(unittest.TestCase):
         self.assertEqual(self.aparelho.dados_troca['defeito'], 'nao liga')
 
         
-    def testValidarTroca_data_expirada(self):
-        """
-            Teste que deve verificar se o metodo validarTroca do apareho realmente
-            NAO valida as trocas no caso em que a data da troca esta fora do prazo
-        """
-        
-        
-        data_compra = self.aparelho.data_compra
-        data_troca = '25/11/2015' # fora do prazo (mais de um ano)
-
-        # a validacao deve falhar retornando False, pois a data da troca esta fora do prazo
-        self.failUnless(self.aparelho.validarTroca(data_compra, data_troca, self.cliente, 'nao liga') == False)
-
-        # o flag indicando que o aparelho foi trocado deve permanecer False
-        self.assertEqual(self.aparelho.trocado, False)
-
 
     def testCadastrarAparelho1(self):
         """
             Teste que deve verificar se o metodo cadastrarAparelho realmente
             esta adicionando o aparelho criado na lista de aparelhos disponiveis
         """
-                
+             
+
         Aparelho.cadastrarAparelho(self.aparelho) # metodo de classe para cadastrar aparelhos
 
         # verifica se o ultimo aparelho adicionado na lista de aparelhos
@@ -85,6 +89,9 @@ class TestAparelho(unittest.TestCase):
             Ao cadastrar um segundo aparelho, a lista de aparelhos disponiveis
             deve crescer para dois. Este teste verificara isso.
         """
+
+        #tamanho da lista de aparelhos disponiveis antes de adicionar um novo aparelho
+        tamanho_anterior = len(Aparelho.aparelhos_disponiveis)
         
         Aparelho.cadastrarAparelho(self.aparelho2)
         
@@ -92,19 +99,38 @@ class TestAparelho(unittest.TestCase):
         # disponiveis eh igual ao aparelho que tentamos cadastrar:
         self.assertEqual(Aparelho.aparelhos_disponiveis[-1], self.aparelho2)
 
-        # ao adicionar mais um aparelho, o tamaho da lista de aparelhos disponiveis deve ser 2
+        # ao adicionar mais um aparelho, o tamaho da lista de aparelhos disponiveis deve crescer em uma unidade
         tamanho = len(Aparelho.aparelhos_disponiveis)
-        self.assertEqual(tamanho, 2)
+        self.assertEqual(tamanho - tamanho_anterior , 1)
+
 
         
-##    def testListarAparelhosDisponiveis(self):
-##        """
-##            Teste simples para verificar se os aparelhos estao sendo listados corretamente
-##        """
-##
-##        self.aparelho2.listarAparelhos()
+    def testListarAparelhosDisponiveis(self):
+        """
+            Teste simples para verificar se os aparelhos estao sendo listados corretamente
+        """
+
+        self.aparelho.listarAparelhos()
+                
+    def testAparelhosTrocados(self):
+        """
+            Deve listar todos os aparelhos que ja foram trocados (atributo 'trocado' == True)
+        """
+        cliente = 'Juana'
+        self.aparelho3 = Aparelho("Apple", "iPad", 2040, '25/12/2011', cliente)
         
+        data_compra = self.aparelho.data_compra
+        data_troca = '25/11/2011'
+        self.aparelho3.trocado = True
+
+        self.aparelho3.dados_troca['cliente'] = cliente
+        self.aparelho3.dados_troca['data'] = data_troca
+        self.aparelho3.dados_troca['defeito'] = 'nao liga'
         
 
+        Aparelho.cadastrarAparelho(self.aparelho3)
+        
+        self.aparelho.aparelhosTrocados()
+        
 if __name__== "__main__":
     unittest.main()

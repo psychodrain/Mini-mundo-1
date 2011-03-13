@@ -2,7 +2,7 @@ class Aparelho:
 
     #atributo de classe
     aparelhos_disponiveis = []
-
+    
     def cadastrarAparelho(aparelho):
         Aparelho.aparelhos_disponiveis.append(aparelho)
 
@@ -36,14 +36,23 @@ class Aparelho:
             self.dados_troca['data'] = data_troca
             self.dados_troca['defeito'] = defeito
 
-            return True
+            return self.trocado
         
         else:
-            return False
+            return self.trocado
 
 
     def listarAparelhos(self):
-        print Aparelho.aparelhos_disponiveis
-
+        print 'Aparelhos disponiveis:'
+        for aparelho in Aparelho.aparelhos_disponiveis:
+            print 'marca: %s, modelo: %s, trocado? %s' % (aparelho.marca, aparelho.modelo, aparelho.trocado)
 
     
+
+    def aparelhosTrocados(self):
+        trocados = [aparelho for aparelho in Aparelho.aparelhos_disponiveis if aparelho.trocado == True]
+
+        print 'trocados: '
+
+        for aparelho in trocados:
+            print 'Um %s (num de serie: %s) foi trocado por %s no dia %s com o seguinte defeito declarado: ''%s''' % (aparelho.modelo, aparelho.num_serie, aparelho.dados_troca['cliente'], aparelho.dados_troca['data'], aparelho.dados_troca['defeito'])
