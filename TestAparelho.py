@@ -117,17 +117,20 @@ class TestAparelho(unittest.TestCase):
             Deve listar todos os aparelhos que ja foram trocados (atributo 'trocado' == True)
         """
         cliente = 'Juana'
+        # cria um novo aparelho
         self.aparelho3 = Aparelho("Apple", "iPad", 2040, '25/12/2011', cliente)
         
+        # dados para popular o dicionario chamado dados_troca
         data_compra = self.aparelho.data_compra
         data_troca = '25/11/2011'
+        # o comando abaixo significa que este aparelho ja foi trocado
         self.aparelho3.trocado = True
-
+        # popula o dicionario chamado dados_troca
         self.aparelho3.dados_troca['cliente'] = cliente
         self.aparelho3.dados_troca['data'] = data_troca
         self.aparelho3.dados_troca['defeito'] = 'nao liga'
         
-
+        # cadastra o novo aparelho criado
         Aparelho.cadastrarAparelho(self.aparelho3)
         
         self.aparelho.aparelhosTrocados()
