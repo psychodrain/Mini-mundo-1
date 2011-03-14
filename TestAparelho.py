@@ -29,6 +29,12 @@ class TestAparelho(unittest.TestCase):
         self.assertEqual(self.aparelho.data_compra, '25/02/2011')
         self.assertEqual(self.aparelho.cliente, self.cliente)
 
+        self.assertEqual(self.aparelho2.marca, 'Apple')
+        self.assertEqual(self.aparelho2.modelo, 'iPhone')
+        self.assertEqual(self.aparelho2.num_serie, 2050)
+        self.assertEqual(self.aparelho2.data_compra, '11/03/2011')
+        self.assertEqual(self.aparelho2.cliente, self.cliente2)
+
 
                 
     def testValidarTroca_data_expirada(self):
