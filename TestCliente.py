@@ -1,3 +1,4 @@
+# -*- coding: cp1252 -*-
 import unittest
 from Cliente import Cliente
 
@@ -21,14 +22,23 @@ class TestCliente(unittest.TestCase):
         lista_clientes = []
         lista_clientes.append(self.cliente)
 
+        #criacao de novos clientes
         cliente2 = Cliente('Maria Maria', '(22) 66554423', 11402766802, True)
         cliente3 = Cliente('Manuel Silveira', '(22) 89765432', 11502766802, False)
 
+        # adicionando novos clientes na lista de clientes
         lista_clientes.append(cliente2)
         lista_clientes.append(cliente3)
+        
+        # clientesSatisfeitos é um metodo estatíco da classe Cliente
+        satisteitos = Cliente.clientesSatisfeitos(lista_clientes)
+        devem_estar_satisfeitos = [cliente.nome for cliente in lista_clientes if cliente.reclamacao == False]
 
-        Cliente.clientesSatisfeitos(lista_clientes)
+        self.assertEqual(satisteitos, devem_estar_satisfeitos)
 
+        # apenas para visualizar no Console o que esta ocorrendo
+        print Cliente.clientesSatisfeitos(lista_clientes)
+        
 
 if __name__== "__main__":
     unittest.main()
