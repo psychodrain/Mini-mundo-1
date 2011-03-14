@@ -17,7 +17,7 @@ class TestAparelho(unittest.TestCase):
         self.aparelho2 = Aparelho("Apple", "iPhone", 2050, '11/03/2011', self.cliente2)
         
 
-    def testCriacaodeAparelho(self):
+    def testConstrutorAparelho(self):
         """
             Teste para verificar se o aparelho esta sendo criado com
             os parametros pretendidos
