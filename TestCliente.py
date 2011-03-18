@@ -32,13 +32,15 @@ class TestCliente(unittest.TestCase):
         
         # clientesSatisfeitos é um metodo estatíco da classe Cliente
         satisteitos = Cliente.clientesSatisfeitos(lista_clientes)
-        devem_estar_satisfeitos = [cliente.nome for cliente in lista_clientes if cliente.reclamacao == False]
+        devem_estar_satisfeitos = ['Joao Ernesto', 'Manuel Silveira']
 
         self.assertEqual(satisteitos, devem_estar_satisfeitos)
 
         # apenas para visualizar no Console o que esta ocorrendo
-        print Cliente.clientesSatisfeitos(lista_clientes)
+        #print Cliente.clientesSatisfeitos(lista_clientes)
+      
         
-
-if __name__== "__main__":
-    unittest.main()
+suite = unittest.TestLoader().loadTestsFromTestCase(TestCliente)
+unittest.TextTestRunner(verbosity=2).run(suite)
+#if __name__== "__main__":
+#    unittest.main()

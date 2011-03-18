@@ -29,7 +29,7 @@ class Aparelho:
 
         
         if ((dia_troca - dia_compra) + (mes_troca - mes_compra)*30 +
-            (ano_troca - ano_compra)*360) <= 360:
+            (ano_troca - ano_compra)*365) <= 365:
 
             self.trocado = True
             self.dados_troca['cliente'] = cliente
